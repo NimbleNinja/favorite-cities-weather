@@ -13,6 +13,7 @@ export const fetchCity = city => {
 
       return {
         cityName: city_name,
+        reqTime: new Date().toLocaleTimeString(),
         lon,
         lat,
         temp,
@@ -37,6 +38,7 @@ export const fetchCities = cities => {
       return response.data.map(({ city_name, lon, lat, weather, temp }) => {
         return {
           cityName: city_name,
+          reqTime: new Date().toLocaleTimeString(),
           lon,
           lat,
           temp,

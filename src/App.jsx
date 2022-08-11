@@ -17,6 +17,10 @@ const App = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
+    if (!name) {
+      return;
+    }
+
     fetchCity(name).then(cityData => {
       if (!cityData) {
         return;
@@ -28,6 +32,7 @@ const App = () => {
 
       if (!condition) {
         const pointsList = JSON.parse(localStorage.getItem('pointsList')) || [];
+
         localStorage.setItem(
           'pointsList',
           JSON.stringify([...pointsList, `(${cityData.lat},${cityData.lon})`]),
@@ -57,8 +62,7 @@ const App = () => {
         </form>
         {cities.length ? (
           <ul className="cities">
-            {cities.map(({ cityName, description, icon, temp }) => {
-              const reqTime = new Date().toLocaleTimeString();
+            {cities.map(({ cityName, reqTime, description, icon, temp }) => {
               return (
                 <li key={cityName} className="cities__item city">
                   <img src={`https://www.weatherbit.io/static/img/icons/${icon}.png`} alt="logo" />
